@@ -4,7 +4,7 @@ Error Check and File Cleanup utility: Check_and_Clean
 
     05/22/2023  11:53 AM             2,101 Check_and_Clean.py
     05/23/2023  09:36 AM             7,968 Check_and_Clean.sh
-    05/17/2023  07:39 PM               304 README.md
+    06/05/2023  01:05 PM               304 README.md
 
 These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, who are part of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
 
@@ -95,22 +95,23 @@ The first line of the file should read:
 Directory Name         # fits_files  # detections  Other Issues
 
 Here are some typical data lines
-US000E_20230302_012710_534432: 4116	1 Only one Capture Directory! 31 GB free / 59 GB total
-US000E_20230303_012802_268331: 4103	54
-US000E_20230304_012856_358320: 4091	41
-US000E_20230305_012947_842752: 4078	23
-US000E_20230306_013037_127826: 4065	1  No Photometry, Clouded out?
-US000E_20230307_013130_000932: 4053	1  No Photometry, Clouded out?
-US000E_20230308_013218_762644: 4040	12
-US000E_20230309_013310_981482: 4027	10
-US000E_20230310_013400_766482: 4014	43
-US000E_20230311_013450_075548: 3999	4	-1 fits -0.2 min
-US000E_20230320_014219_338230: 3885	1  No Photometry, Clouded out?
-US000E_20230321_014308_622472: 3872	1  No Photometry, Clouded out?
-US000E_20230322_014357_170585: 3858	23
-US000E_20230323_014447_897819: 3845	1  No Photometry, Clouded out?
-US000E_20230324_014535_873013: 3832	27
-US000E_20230325_014627_146438: 3819	30
+    
+    US000E_20230302_012710_534432: 4116	1 Only one Capture Directory! 31 GB free / 59 GB total
+    US000E_20230303_012802_268331: 4103	54
+    US000E_20230304_012856_358320: 4091	41
+    US000E_20230305_012947_842752: 4078	23
+    US000E_20230306_013037_127826: 4065	1  No Photometry, Clouded out?
+    US000E_20230307_013130_000932: 4053	1  No Photometry, Clouded out?
+    US000E_20230308_013218_762644: 4040	12
+    US000E_20230309_013310_981482: 4027	10
+    US000E_20230310_013400_766482: 4014	43
+    US000E_20230311_013450_075548: 3999	4	-1 fits -0.2 min
+    US000E_20230320_014219_338230: 3885	1  No Photometry, Clouded out?
+    US000E_20230321_014308_622472: 3872	1  No Photometry, Clouded out?
+    US000E_20230322_014357_170585: 3858	23
+    US000E_20230323_014447_897819: 3845	1  No Photometry, Clouded out?
+    US000E_20230324_014535_873013: 3832	27
+    US000E_20230325_014627_146438: 3819	30
 
 First the CapturedFiles data directory is listed, next the number of fits files found in that directory, next the number of detections reported in the filename of the detected stack, and finally, any other issues that are found. These other issues may include:
  - a shortfall in number of fits files captured or a warning if no fits files are recorded
