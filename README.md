@@ -2,46 +2,93 @@
 
 Error Check and File Cleanup utility: Check_and_Clean
 
-05/22/2023  11:53 AM             2,101 Check_and_Clean.py
-05/23/2023  09:36 AM             7,968 Check_and_Clean.sh
-05/17/2023  07:39 PM               304 README.md
+    05/22/2023  11:53 AM             2,101 Check_and_Clean.py
+    05/23/2023  09:36 AM             7,968 Check_and_Clean.sh
+    05/17/2023  07:39 PM               304 README.md
 
 These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, who are part of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
 
-To use these files, you need to call Check_and_Clean.py as an external script, or, if you are already using an external script, you need to add the call to Check_and_Clean.sh at the end of your existing script, just before the code to reboot the station.
+## Installing Check_and_Clean
+To use these files, you need to either 
+1. Call Check_and_Clean.py as an external script; or
+2. If you are already using an external script, you need to add the call to Check_and_Clean.sh at the end of your existing script, just before the code to reboot the station.
 
+### First Case: Adding an External Script for the first time.
 If you are adding an external script for the first time, edit your .config file so it reads this way:
 
-; External script
-; An external script will be run after RMS finishes the processing for the night, it will be passed
+    ; External script
+    ; An external script will be run after RMS finishes the processing for the night, it will be passed
  
-; three arguments:
-;   captured_night_dir, archived_night_dir, config - captured_night dir is the full path to the 
-;   captured folder of the night, the second one is the archived, and config is an object holding 
-;   the values in this config file.
-; ---------------
-; Enable running an external script at the end of every night of processing
-external_script_run: true
-; Run the external script after auto reprocess. "auto_reprocess" needs to be "true" for this to work.
-auto_reprocess_external_script_run: true
-; Full path to the external script
-external_script_path: /home/pi/source/RMS_extra_tools/Check_and_Clean.py
-; Name of the function in the external script which will be called
-external_function_name: rmsExternal
+    ; three arguments:
+    ;   captured_night_dir, archived_night_dir, config - captured_night dir is the full path to the 
+    ;   captured folder of the night, the second one is the archived, and config is an object holding 
+    ;   the values in this config file.
+    ; ---------------
+    ; Enable running an external script at the end of every night of processing
+    external_script_run: true
+    ; Run the external script after auto reprocess. "auto_reprocess" needs to be "true" for this to work.
+    auto_reprocess_external_script_run: true
+    ; Full path to the external script
+    external_script_path: /home/pi/source/RMS_extra_tools/Check_and_Clean.py
+    ; Name of the function in the external script which will be called
+    external_function_name: rmsExternal
 
 
-; Daily reboot
-; ---------------
-; Reboot the computer daily after the processing and upload is done
-reboot_after_processing: false
-; Name of the lock file which the external script should create to prevent rebooting until the 
-;   script is done. The external script should remove this file if the reboot is to run after the 
-;   script finishes. This file should be created in the config.data_dir directory (i.e. ~/RMS_data)
-.
-reboot_lock_file: .reboot_lock
+    ; Daily reboot
+    ; ---------------
+    ; Reboot the computer daily after the processing and upload is done
+    reboot_after_processing: false
+    ; Name of the lock file which the external script should create to prevent rebooting until the 
+    ;   script is done. The external script should remove this file if the reboot is to run after the 
+    ;   script finishes. This file should be created in the config.data_dir directory (i.e. ~/RMS_data).
 
-_____
+    reboot_lock_file: .reboot_lock
 
+### Second Case: Calling from an existing external script
+You may call the Check_and_Clean.sh bash script in two ways. 
+The first does not support logging of results as Check_and_Clean.sh executes,
+while the second one does support such logging.
+Both are written in Python, as these code snippets are in the external script Python file.
+It is important to note that the "captured_night_dir" is a full path to a directory
+under the RMS_data/CapturedFiles directory. 
+An example from a Pi4-based RMS system is
+
+    /home/pi/RMS_data/CapturedFiles/US000N_20230605_024541_516553
+
+#### No logging
+
+    # Call Check_and_Clean.sh
+    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Check_and_Clean.sh")
+
+    command = [
+            script_path,
+            captured_night_dir
+            ]
+
+    proc = subprocess.Popen(command)
+
+#### With logging
+
+    # Call Check_and_Clean.sh
+    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Check_and_Clean.sh")
+
+    command = [
+            script_path,
+            captured_night_dir
+            ]
+     proc = subprocess.Popen(command,stdout=subprocess.PIPE)
+     # Read Check_and_Clean.sh script output and append to log file
+     while True:
+        line = proc.stdout.readline()
+        if not line:
+            break
+        log.info(line.rstrip().decode("utf-8"))
+
+    exit_code = proc.wait()
+    log.info('Exit status: {}'.format(exit_code))
+    log.info(Check_and_Clean.sh script finished')
+
+## Results of running Check_and_Clean.sh
 Error checking is logged to the file ~/RMS_data/<StationID>_fits.counts.txt
 The first line of the file should read:
 
