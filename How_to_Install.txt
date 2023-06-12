@@ -1,0 +1,14 @@
+How to install Check_and_Clean utility files:
+
+In the instructions below, the ~ symbol is a shorthand for the directory path down to the directory following the symbol. In most cases ~ means /home/pi
+
+Start a terminal session. Usually this puts you in ~/source/RMS, and if so, you need to cd .. to the ~/source directory. At this point your terminal session should be in ~/source
+
+Enter this command to clone the Check_and_Clean files to your station:
+
+git clone git@github.com:sgkaufman/RMS_extra_tools.git
+
+now make sure that the Check_and_Clean.sh is set to executable.
+chmod +x *.sh
+
+Next, follow the steps in README.md to enable Check_and_Clean as your external script, or add it to your existing external script.
