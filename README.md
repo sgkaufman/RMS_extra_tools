@@ -69,6 +69,7 @@ An example from a Pi4-based RMS system is
     proc = subprocess.Popen(command)
 
 #### With logging
+    import subprocess
 
     # Call Check_and_Clean.sh
     script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Check_and_Clean.sh")
