@@ -1,13 +1,29 @@
-# RMS_extra_tools, 11-Jun, 2023
+# RMS_extra_tools/Check_and_Clean, 15-Jun, 2023
 
 Error Check and File Cleanup utility: Check_and_Clean
 
-    06/05/2023  02:30 AM             2,101 Check_and_Clean.py
-    06/11/2023  02:33 PM             8,829 Check_and_Clean.sh
+    06/14/2023  02:32 PM             2,975 Check_and_Clean.py
+    06/12/2023  11:34 AM             8,830 Check_and_Clean.sh
     06/05/2023  02:30 PM            35,823 LICENSE
-    06/11/2023  02:35 PM             8,022 README.md
+    06/15/2023  12:14 PM             9,932 README.md
 
 These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, who are part of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
+
+The Check_and_Clean utility checks for missing data by counting the number of fits files in the capture directory and checking that total against the number expected from the capture duration for that night. This indirectly checks for dropped frames, because dropped frames delay the start of the next fits file, which reduces the remaining time available to capture new fits files. At the end of error checking, you have the option automate the removal of older files and directories.
+
+In the instructions below, the ~ symbol is a shorthand for the directory path down to the directory following the symbol. In most cases ~ means /home/pi.
+
+Start a terminal session. Usually this puts you in ~/source/RMS, and if so, you need to cd .. to the ~/source directory. At this point your terminal session should be in ~/source.
+
+Enter this command to clone the Check_and_Clean files to your station:
+
+http://github.com/sgkaufman/RMS_extra_tools.git
+
+Next, make sure that the Check_and_Clean.sh is executable:
+chmod +x *.sh
+
+Next, follow the steps outlined below to enable Check_and_Clean as your external script, or add it to your existing external script.
+
 
 ## Installing Check_and_Clean
 To use these files, you need to either 
@@ -38,7 +54,7 @@ If you are adding an external script for the first time, edit your .config file 
     ; Daily reboot
     ; ---------------
     ; Reboot the computer daily after the processing and upload is done
-    reboot_after_processing: false
+    reboot_after_processing: true
     ; Name of the lock file which the external script should create to prevent rebooting until the 
     ;   script is done. The external script should remove this file if the reboot is to run after the 
     ;   script finishes. This file should be created in the config.data_dir directory (i.e. ~/RMS_data).
@@ -67,6 +83,8 @@ An example from a Pi4-based RMS system is
             ]
 
     proc = subprocess.Popen(command)
+
+    exit_code = proc.wait()
 
 #### With logging
     import subprocess
@@ -130,7 +148,7 @@ If your camera captures a different number of frames per second, you will have t
 
 If the total fits files recorded is less than the corrected total a message is written to ~/RMS_data/<StationID>_fits.counts.txt showing the shortfall in file count and number of minutes of data that were missed.
 
-In a few unusual cases where the system has rebooted during capture, the newest log file may be missing the capture duration log file line, in which case, the total number of expected fits files will be in error and an incorrect shorfall value may be reported.
+In a few unusual cases where the system has rebooted during capture, the newest log file may be missing the capture duration log file line, in which case, the total number of expected fits files will be in error and an incorrect shortfall value may be reported.
 
 
 As shown in the example above, other errors may be logged following the number of detected meteors.
@@ -138,5 +156,11 @@ As shown in the example above, other errors may be logged following the number o
 
 At the end of the Check_and_Clean.sh script you can have the script clean out older files so there is more room to keep CapturedFiles directories. Sometimes it is important to have an older CapturedFiles directory available to extract data for a bolide that was too bright to be detected as a meteor.
 
-This cleanup can be enabled or disabled by setting the variable CleanUp (around line 18 in the script) to either 1 or 0.
+This cleanup can be enabled or disabled by setting the variable CleanUp (around line 19 in the script) to either 1 or 0. If 1, then cleanup is done, if 0 then cleanup is skipped.
+
+Further down in the script, in the Cleanup section around line 200, is a set of variables (adirs, cdirs, bz2, and logs) which control the amount of cleanup that is done. For instance adirs=10 means keep most recent 10 ArchivedFiles directories, and logs=21 means delete log files more than 21 days old. You should customize these values in order to have store as many CapturedFiles directories as possible.
+adirs=10	# delete older ArchivedFiles directories
+cdirs=10	# delete older CapturedFiles directories
+bz2=10		# delete older tar.bz2 archives
+logs=21		# delete log files older than this number of days
 _________________________
