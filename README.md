@@ -11,7 +11,7 @@ These RMS utility files can be used by RMS/GMN stations. They were written by Pe
 
 The Check_and_Clean utility checks for missing data by counting the number of fits files in the capture directory and checking that total against the number expected from the capture duration for that night. This indirectly checks for dropped frames, because dropped frames delay the start of the next fits file, which reduces the remaining time available to capture new fits files. At the end of error checking, you have the option automate the removal of older files and directories.
 
-In the instructions below, the ~ symbol is a shorthand for the directory path down to the directory following the symbol. In most cases ~ means /home/pi.
+In the instructions below, the ~ symbol is a shorthand for the "HOME" directory path. In most cases on the Raspberry Pi, "~" means "/home/pi".
 
 Start a terminal session. Usually this puts you in ~/source/RMS, and if so, you need to cd .. to the ~/source directory. At this point your terminal session should be in ~/source.
 
