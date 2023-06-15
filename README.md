@@ -17,7 +17,7 @@ Start a terminal session. Usually this puts you in ~/source/RMS, and if so, you 
 
 Enter this command to clone the Check_and_Clean files to your station:
 
-git clone http://github.com/sgkaufman/RMS_extra_tools.git
+git clone https://github.com/sgkaufman/RMS_extra_tools.git
 
 Next, make sure that the Check_and_Clean.sh is executable:
 chmod +x *.sh
