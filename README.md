@@ -5,19 +5,19 @@ Error Check and File Cleanup utility: Check_and_Clean
     06/14/2023  02:32 PM             2,975 Check_and_Clean.py
     06/12/2023  11:34 AM             8,830 Check_and_Clean.sh
     06/05/2023  02:30 PM            35,823 LICENSE
-    06/15/2023  12:14 PM             9,932 README.md
+    06/15/2023  04:40 PM             9,776 README.md
 
 These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, who are part of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
 
 The Check_and_Clean utility checks for missing data by counting the number of fits files in the capture directory and checking that total against the number expected from the capture duration for that night. This indirectly checks for dropped frames, because dropped frames delay the start of the next fits file, which reduces the remaining time available to capture new fits files. At the end of error checking, you have the option automate the removal of older files and directories.
 
-In the instructions below, the ~ symbol is a shorthand for the directory path down to the directory following the symbol. In most cases ~ means /home/pi.
+In the instructions below, the ~ symbol is a shorthand for the "HOME" directory path. In most cases on the Raspberry Pi, "~" means "/home/pi".
 
 Start a terminal session. Usually this puts you in ~/source/RMS, and if so, you need to cd .. to the ~/source directory. At this point your terminal session should be in ~/source.
 
 Enter this command to clone the Check_and_Clean files to your station:
 
-http://github.com/sgkaufman/RMS_extra_tools.git
+git clone http://github.com/sgkaufman/RMS_extra_tools.git
 
 Next, make sure that the Check_and_Clean.sh is executable:
 chmod +x *.sh
