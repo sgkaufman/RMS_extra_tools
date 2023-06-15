@@ -11,7 +11,7 @@ night_dir="$(basename "$1")"
 station=${night_dir:0:6}
 OUTFILE=$data_dir"/"${station}_"fits_counts.txt"
 
-printf '\nCheck_and_Clean.sh, revised 12-Jun, 2023, 8830 bytes,'
+printf '\nCheck_and_Clean.sh, revised 15-Jun, 2023, 8814 bytes,'
 printf ' was called with\nArg (directory) = %s \n' "$1"
 printf 'This script writes results to %s \n' $OUTFILE
 printf ' and can delete older files to make room for more capture directories\n\n'
