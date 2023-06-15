@@ -29,11 +29,11 @@ short_fall=0
 secs_missed=0
 min_missed=0
 
-#echo data_dir:    $data_dir
-#echo archive_dir: $archive_dir
-#echo capture_dir: $capture_dir
-#echo night_dir:   $night_dir
-#echo station:     $station
+echo data_dir:    $data_dir
+echo archive_dir: $archive_dir
+echo capture_dir: $capture_dir
+echo night_dir:   $night_dir
+echo station:     $station
 
 # ____________________
 # Sanity checks
@@ -66,12 +66,12 @@ capture_file=$(ls -Art $data_dir/logs/log_*.log | tail -n 1)
 #echo Checking log file: $capture_file for capture duration
 
 duration_line=$(grep -m1 Waiting $capture_file)
-#echo log file line: $duration_line
+echo log file line: $duration_line
 
 hrs=$(echo "$duration_line" | awk '{print $10}')
 seconds=`echo "$hrs*3600" | bc`
 capture_len=${seconds:0:5}
-#echo hours: $hrs, seconds: $seconds, rounded off seconds: $capture_len
+echo hours: $hrs, seconds: $seconds, rounded off seconds: $capture_len
 
 # ____________________
 # Collect information for the output file
@@ -115,7 +115,7 @@ fi
 # The variable "id_string" holds the station name and date in a pattern.
 
 id_string=${night_dir:0:15}
-#printf "id_string: %s\n" "$id_string"
+printf "id_string: %s\n" "$id_string"
 
 # CapturedFiles
 pushd "$capture_dir" > /dev/null
@@ -197,10 +197,10 @@ printf "Fits file count and number of detections saved to: %s\n\n" "$OUTFILE"
 # var Cleanup is set above on line 19
 
 # set variables adirs, cdirs, and bz2 to 0 to skip cleanups
-adirs=10	# delete older ArchivedFiles directories
-cdirs=10	# delete older CapturedFiles directories
-bz2=10		# delete older tar.bz2 archives
-logs=21		# delete log files older than this number of days
+adirs=15	# delete older ArchivedFiles directories
+cdirs=15	# delete older CapturedFiles directories
+bz2=28		# delete older tar.bz2 archives
+logs=28		# delete log files older than this number of days
 
 # Define function clean_dir, with arguments:
 # 1. directory to clean
@@ -225,7 +225,7 @@ function clean_dir()
 	#printf "%d: %s\n" $i ${dir_array[i]}
 	if [[ $i -gt $2-1 ]]; then
 	    printf "Removing directory %s\n" ${dir_array[i]}
-	    rm -f -r ${dir_array[i]}
+	    rm -rf ${dir_array[i]}
 	else
 	    printf "Retaining directory %s\n" ${dir_array[i]}
 	fi
