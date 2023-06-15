@@ -87,6 +87,7 @@ An example from a Pi4-based RMS system is
     exit_code = proc.wait()
 
 #### With logging
+    # Add the next line to the top of the file with other import statements
     import subprocess
 
     # Call Check_and_Clean.sh
