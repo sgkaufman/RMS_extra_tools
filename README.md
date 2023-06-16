@@ -113,7 +113,7 @@ An example from a Pi4-based RMS system is
 Error checking is logged to the file ~/RMS_data/<StationID>_fits.counts.txt
 The first line of the file should read:
 
-Directory Name         # fits_files  # detections  Other Issues
+    Directory Name         # fits_files  # detections  Other Issues
 
 Here are some typical data lines
     
