@@ -30,6 +30,10 @@ To use these files, you need to either
 1. Call Check_and_Clean.py as an external script; or
 2. If you are already using an external script, you need to add the call to Check_and_Clean.sh at the end of your existing script, just before the code to reboot the station.
 
+In either case, you may need to change the path and filename of the shell script to execute. 
+If the script has a different name, or is in a different location than the default, edit line 27
+of Check_and_Clean.py to indicate where it is and wehat it is named.
+
 ### First Case: Adding an External Script for the first time.
 If you are adding an external script for the first time, edit your .config file so it reads this way:
 
