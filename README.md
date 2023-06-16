@@ -32,7 +32,7 @@ To use these files, you need to either
 
 In either case, you may need to change the path and filename of the shell script to execute. 
 If the script has a different name, or is in a different location than the default, edit line 27
-of Check_and_Clean.py to indicate where it is and wehat it is named.
+of Check_and_Clean.py (the value of the variable "script_location") to indicate where it is and what it is named.
 
 ### First Case: Adding an External Script for the first time.
 If you are adding an external script for the first time, edit your .config file so it reads this way:
