@@ -27,30 +27,32 @@ def rmsExternal(captured_night_dir, archived_night_dir, config):
     script_location = "$HOME/source/RMS_extra_tools/Check_and_Clean.sh"
     script_path = os.path.expandvars(script_location)
 
-    command = [
+    if os.path.exists(script_path):
+        command = [
             script_path,
-            captured_night_dir,
+            captured_night_dir
             ]
 
-    proc = subprocess.Popen(command)
+        proc = subprocess.Popen(command)
 
-    exit_code = proc.wait()
+        exit_code = proc.wait()
 
-    # Relase lock file so RMS is authorized to reboot, if needed
-    os.remove(lockfile)
+        # Release lock file so RMS is authorized to reboot, if needed
+        os.remove(lockfile)
 
-    # Only reboot RPis, don't reboot Linux machines
-    if isRaspberryPi():
+        # Only reboot RPis, don't reboot Linux machines
+        if isRaspberryPi():
     
-        # Reboot the computer (script needs sudo priviledges, works only on Pis)
-        try:
-            print ("Rebooting system...")
-            os.system('sudo shutdown -r now')
+            # Reboot the computer (script needs sudo priviledges, works only on Pis)
+            try:
+                print ("Rebooting system...")
+                os.system('sudo shutdown -r now')
             
-        except Exception as e:
-            print ('Rebooting failed with message:\n' + repr(e))
-            print (repr(traceback.format_exception(*sys.exc_info())))
-
+            except Exception as e:
+                print ('Rebooting failed with message:\n' + repr(e))
+                print (repr(traceback.format_exception(*sys.exc_info())))
+    else:
+        print ('File {} does not exist - cannot execute'.format(script_path))
 
 #########################################################################
 
