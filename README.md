@@ -159,7 +159,8 @@ At the end of the Check_and_Clean.sh script you can have the script clean out ol
 
 This cleanup can be enabled or disabled by setting the variable CleanUp (around line 19 in the script) to either 1 or 0. If 1, then cleanup is done, if 0 then cleanup is skipped.
 
-Further down in the script, in the Cleanup section around line 200, is a set of variables (adirs, cdirs, bz2, and logs) which control the amount of cleanup that is done. For instance adirs=10 means keep most recent 10 ArchivedFiles directories, and logs=21 means delete log files more than 21 days old. You should customize these values in order to have store as many CapturedFiles directories as possible.
+Further down in the script, in the Cleanup section around line 200, is a set of variables (adirs, cdirs, bz2, and logs) which control the amount of cleanup that is done. For instance adirs=10 means keep most recent 10 ArchivedFiles directories, and logs=21 means delete log files more than 21 days old. You should customize these values in order to have room for as many CapturedFiles directories as possible.
+
 adirs=10	# delete older ArchivedFiles directories
 cdirs=10	# delete older CapturedFiles directories
 bz2=10		# delete older tar.bz2 archives
