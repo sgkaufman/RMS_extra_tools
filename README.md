@@ -161,8 +161,8 @@ This cleanup can be enabled or disabled by setting the variable CleanUp (around 
 
 Further down in the script, in the Cleanup section around line 200, is a set of variables (adirs, cdirs, bz2, and logs) which control the amount of cleanup that is done. For instance adirs=10 means keep most recent 10 ArchivedFiles directories, and logs=21 means delete log files more than 21 days old. You should customize these values in order to have room for as many CapturedFiles directories as possible.
 
-adirs=10	# delete older ArchivedFiles directories
-cdirs=10	# delete older CapturedFiles directories
-bz2=10		# delete older tar.bz2 archives
-logs=21		# delete log files older than this number of days
+    adirs=10	# delete ArchivedFiles directories older than 10 days
+    cdirs=10	# delete CapturedFiles directories older than 10 days
+    bz2=10		# delete older tar.bz2 archives older than 10 days
+    logs=21		# delete log files older than 21 days
 _________________________
