@@ -197,10 +197,10 @@ printf "Fits file count and number of detections saved to: %s\n\n" "$OUTFILE"
 # var Cleanup is set above on line 19
 
 # set variables adirs, cdirs, and bz2 to 0 to skip cleanups
-adirs=10	# delete older ArchivedFiles directories
-cdirs=10	# delete older CapturedFiles directories
-bz2=10		# delete older tar.bz2 archives
-logs=21		# delete log files older than this number of days
+adirs=15	# delete older ArchivedFiles directories
+cdirs=15	# delete older CapturedFiles directories
+bz2=28		# delete older tar.bz2 archives
+logs=28		# delete log files older than this number of days
 
 # Define function clean_dir, with arguments:
 # 1. directory to clean
@@ -224,8 +224,8 @@ function clean_dir()
     for ((i=0; i<dir_len; i++)); do
 	printf "%d: %s\n" $i ${dir_array[i]}
 	if [[ $i -gt $2-1 ]]; then
-	    #printf "Removing directory %s\n" ${dir_array[i]}
-	    rm -f -r ${dir_array[i]}
+	    # printf "Removing directory %s\n" ${dir_array[i]}
+	    rm -fr ${dir_array[i]}
 	else
 	    printf "Retaining directory %s\n" ${dir_array[i]}
 	fi
