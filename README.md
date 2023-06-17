@@ -2,18 +2,18 @@
 
 Error Check and File Cleanup utility: Check_and_Clean
 
-    06/16/2023  20:30 PM             3,186 Check_and_Clean.py
-    06/12/2023  11:34 AM             8,830 Check_and_Clean.sh
-    06/05/2023  02:30 PM            35,823 LICENSE
-    06/16/2023  22:13 PM            10,205 README.md
+    06/16/2023         3,186 Check_and_Clean.py
+    06/17/2023         8,834 Check_and_Clean.sh
+    06/05/2023        35,823 LICENSE
+    06/17/2023        10,342 README.md
 
-These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, who are part of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
+These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
 
 The Check_and_Clean utility checks for missing data by counting the number of fits files in the capture directory and checking that total against the number expected from the capture duration for that night. This indirectly checks for dropped frames, because dropped frames delay the start of the next fits file, which reduces the remaining time available to capture new fits files. At the end of error checking, you have the option automate the removal of older files and directories.
 
 In the instructions below, the ~ symbol is a shorthand for the "HOME" directory path. In most cases on the Raspberry Pi, "~" means "/home/pi".
 
-Start a terminal session. Usually this puts you in ~/source/RMS, and if so, you need to cd .. to the ~/source directory. At this point your terminal session should be in ~/source.
+To install the Check_and_Clean utility, start a terminal session. Usually this puts you in ~/source/RMS, and if so, you need to execute the command "cd .." to move to the ~/source directory. At this point your terminal session should be in ~/source.
 
 Enter this command to clone the Check_and_Clean files to your station:
 
@@ -30,9 +30,9 @@ To use these files, you need to either
 1. Call Check_and_Clean.py as an external script; or
 2. If you are already using an external script, you need to add the call to Check_and_Clean.sh at the end of your existing script, just before the code to reboot the station.
 
-In either case, you may need to change the path and filename of the shell script to execute. 
-If the script has a different name, or is in a different location than the default, edit line 27
-of Check_and_Clean.py (the value of the variable "script_location") to indicate where it is and what it is named.
+In either case, you may need to change the path and filename of the shell script you wish to execute. 
+If the script has a different name, or is in a different location than the default "~/source/RMS_extra_tools", 
+edit line 27 of Check_and_Clean.py (the value of the variable "script_location") to indicate where it is and what it is named.
 
 ### First Case: Adding an External Script for the first time.
 If you are adding an external script for the first time, edit your .config file so it reads this way:
@@ -154,7 +154,7 @@ Because of a small amount of overhead as the system starts and stops capture, th
 
 If your camera captures a different number of frames per second, you will have to adjust this section of Check_and_Clean.sh, located around line 84.
 
-If the total fits files recorded is less than the corrected total a message is written to ~/RMS_data/<StationID>_fits.counts.txt showing the shortfall in file count and number of minutes of data that were missed.
+If the total fits files recorded is less than the corrected total, a message is written to ~/RMS_data/<StationID>_fits.counts.txt showing the shortfall in file count and number of minutes of data that were missed.
 
 In a few unusual cases where the system has rebooted during capture, the newest log file may be missing the capture duration log file line, in which case, the total number of expected fits files will be in error and an incorrect shortfall value may be reported.
 
@@ -166,7 +166,7 @@ At the end of the Check_and_Clean.sh script you can have the script clean out ol
 
 This cleanup can be enabled or disabled by setting the variable CleanUp (around line 19 in the script) to either 1 or 0. If 1, then cleanup is done, if 0 then cleanup is skipped.
 
-Further down in the script, in the Cleanup section around line 200, is a set of variables (adirs, cdirs, bz2, and logs) which control the amount of cleanup that is done. For instance adirs=10 means keep most recent 10 ArchivedFiles directories, and logs=21 means delete log files more than 21 days old. You should customize these values in order to have room for as many CapturedFiles directories as possible.
+Further down in the script, in the Cleanup section around line 200, is a set of variables (adirs, cdirs, bz2, and logs) which control the amount of cleanup that is done. For instance, adirs=10 means keep most recent 10 ArchivedFiles directories, and logs=21 means delete log files more than 21 days old. You should customize these values in order to have room for as many CapturedFiles directories as possible.
 
     adirs=10	# delete ArchivedFiles directories older than 10 days
     cdirs=10	# delete CapturedFiles directories older than 10 days
