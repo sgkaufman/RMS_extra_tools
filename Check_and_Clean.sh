@@ -213,21 +213,21 @@ logs=21		# delete log files older than this number of days
 
 function clean_dir()
 {
-    #printf "clean_dir called with arg1 %s and arg2 %d\n" $1 $2
+    printf "clean_dir called with arg1 %s and arg2 %d\n" $1 $2
 
     # enclosing parentheses make the result an array
     dir_array=($(find "$1" -maxdepth 1 -type d -name "${station}*" | sort -r))
 
     dir_len=${#dir_array[@]}
-    #printf "Number directories under %s: %d\n" $1 ${dir_len}
+    printf "Number directories under %s: %d\n" $1 ${dir_len}
 
     for ((i=0; i<dir_len; i++)); do
-	#printf "%d: %s\n" $i ${dir_array[i]}
+	printf "%d: %s\n" $i ${dir_array[i]}
 	if [[ $i -gt $2-1 ]]; then
 	    #printf "Removing directory %s\n" ${dir_array[i]}
 	    rm -f -r ${dir_array[i]}
-	#else
-	    #printf "Retaining directory %s\n" ${dir_array[i]}
+	else
+	    printf "Retaining directory %s\n" ${dir_array[i]}
 	fi
     done
 }

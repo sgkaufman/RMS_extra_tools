@@ -24,7 +24,7 @@ def rmsExternal(captured_night_dir, archived_night_dir, config):
         pass
 
     # Call Check_and_Clean.sh
-    script_location = "$HOME/source/NMMA/RMS_extra_tools/Check_and_Clean.sh"
+    script_location = "$HOME/source/RMS_extra_tools/Check_and_Clean.sh"
     script_path = os.path.expandvars(script_location)
 
     if os.path.exists(script_path):
