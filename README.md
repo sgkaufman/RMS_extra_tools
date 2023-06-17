@@ -79,7 +79,7 @@ An example from a Pi4-based RMS system is
 #### No logging
 
     # Call Check_and_Clean.sh
-    script_location = "$HOME/source/NMMA/RMS_extra_tools/Check_and_Clean.sh"
+    script_location = "$HOME/source/RMS_extra_tools/Check_and_Clean.sh"
     script_path = os.path.expandvars(script_location)
 
     command = [
@@ -97,7 +97,7 @@ An example from a Pi4-based RMS system is
     import subprocess, os
 
     # Call Check_and_Clean.sh
-    script_location = "$HOME/source/NMMA/RMS_extra_tools/Check_and_Clean.sh"
+    script_location = "$HOME/source/RMS_extra_tools/Check_and_Clean.sh"
     script_path = os.path.expandvars(script_location)
 
     command = [
