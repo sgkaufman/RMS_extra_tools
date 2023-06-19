@@ -117,7 +117,7 @@ An example from a Pi4-based RMS system is
     log.info(Check_and_Clean.sh script finished')
 
 ## Results of running Check_and_Clean.sh
-Error checking is logged to the file ~/RMS_data/<StationID>_fits.counts.txt
+Error checking is logged to the file ~/RMS_data/\<StationID\>_fits_counts.txt
 The first line of the file should read:
 
     Directory Name         # fits_files  # detections  Other Issues
@@ -154,7 +154,7 @@ Because of a small amount of overhead as the system starts and stops capture, th
 
 If your camera captures a different number of frames per second, you will have to adjust this section of Check_and_Clean.sh, located around line 84.
 
-If the total fits files recorded is less than the corrected total, a message is written to ~/RMS_data/<StationID>_fits.counts.txt showing the shortfall in file count and number of minutes of data that were missed.
+If the total fits files recorded is less than the corrected total, a message is written to ~/RMS_data/\<StationID\>_fits_counts.txt showing the shortfall in file count and number of minutes of data that were missed.
 
 In a few unusual cases where the system has rebooted during capture, the newest log file may be missing the capture duration log file line, in which case, the total number of expected fits files will be in error and an incorrect shortfall value may be reported.
 
@@ -162,7 +162,7 @@ In a few unusual cases where the system has rebooted during capture, the newest 
 As shown in the example above, other errors may be logged following the number of detected meteors.
 
 
-At the end of the Check_and_Clean.sh script you can have the script clean out older files so there is more room to keep CapturedFiles directories. Sometimes it is important to have an older CapturedFiles directory available to extract data for a bolide that was too bright to be detected as a meteor.
+At the end of the Check_and_Clean.sh script you can have the script clean out older files so there is more room to keep CapturedFiles directories. It can be important to have an older CapturedFiles directory available to extract data for a bolide that was too bright to be detected as a meteor.
 
 This cleanup can be enabled or disabled by setting the variable CleanUp (around line 19 in the script) to either 1 or 0. If 1, then cleanup is done, if 0 then cleanup is skipped.
 
