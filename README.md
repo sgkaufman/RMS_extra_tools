@@ -22,10 +22,23 @@ git clone https://github.com/sgkaufman/RMS_extra_tools.git
 Next, make sure that the Check_and_Clean.sh is executable:
 chmod +x RMS/extra_tools/*.sh
 
-Next, follow the steps outlined below to enable Check_and_Clean as your external script, or add it to your existing external script.
+## If Running on a Raspberry Pi 3 (Jessie)
+
+If you are running a RPi 3 using Jessie RMS, you will need to do an extra step before running Check_and_Clean. The bc command is probably missing, so you need to install it:
+
+    sudo apt -y install bc
+
+This command will install the missing bc command to your Jessie RMS station.
+
+We recommend you follow the steps below to run Check_and_Clean as an external script, but you can run Check_and_Clean manually if you follow several steps. To run manually, you will need to make sure that your .config file is in the default ~/source/RMS location or that you use a command line argument to point to the correct location. You will also need to specify the full path to the captured files directory on the command line:
+
+    cd ~/source/RMS_extra_tools
+    python -m Check_and_Clean --directory <full path to the captured files directory>
 
 
 ## Installing Check_and_Clean
+Follow the steps outlined below to enable Check_and_Clean as your external script, or add it to your existing external script.
+
 To use these files, you need to either 
 1. Call Check_and_Clean.py as an external script; or
 2. If you are already using an external script, you need to add the call to Check_and_Clean.sh at the end of your existing script, just before the code to reboot the station.
