@@ -7,7 +7,7 @@ Error Check and File Cleanup utility: Check_and_Clean
     06/05/2023        35,823 LICENSE
     07/05/2023        10,396 README.md
 
-These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the <Station_ID>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
+These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the \<Station_ID\>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
 
 The Check_and_Clean utility checks for missing data by counting the number of fits files in the capture directory and checking that total against the number expected from the capture duration for that night. This indirectly checks for dropped frames, because dropped frames delay the start of the next fits file, which reduces the remaining time available to capture new fits files. At the end of error checking, you have the option automate the removal of older files and directories.
 
@@ -20,7 +20,7 @@ Enter this command to clone the Check_and_Clean files to your station:
 git clone https://github.com/sgkaufman/RMS_extra_tools.git
 
 Next, make sure that the Check_and_Clean.sh is executable:
-chmod +x RMS/extra_tools/*.sh
+chmod +x RMS_extra_tools/*.sh
 
 ## If Running on a Raspberry Pi 3 (Jessie)
 
