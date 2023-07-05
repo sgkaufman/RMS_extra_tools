@@ -2,10 +2,10 @@
 
 Error Check and File Cleanup utility: Check_and_Clean
 
-    06/16/2023         3,186 Check_and_Clean.py
-    06/17/2023         8,834 Check_and_Clean.sh
+    06/19/2023         3,186 Check_and_Clean.py
+    06/19/2023         8,834 Check_and_Clean.sh
     06/05/2023        35,823 LICENSE
-    07/05/2023        10,396 README.md
+    07/05/2023        11,271 README.md
 
 These RMS utility files can be used by RMS/GMN stations. They were written by Peter Eschman and Steve Kaufman, of the New Mexico Meteor Array (NMMA). They enable error checking of  RMS/GMN data, and store the results in the \<Station_ID\>_Fits_Counts.txt file which is located in the ~/RMS_data directory. One new data line is added to the txt file each morning. This file is a very compact summary of station status, and can also be used to add notes manually regarding refocusing the camera, a new platepar file, or other details.
 
